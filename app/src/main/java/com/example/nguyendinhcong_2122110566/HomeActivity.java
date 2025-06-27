@@ -34,11 +34,19 @@ public class HomeActivity extends AppCompatActivity {
         ProductAdapter adapter = new ProductAdapter(this, products);
         listView.setAdapter(adapter);
 
-        ImageButton btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Product product = products.get(position);
+            Intent intent = new Intent(HomeActivity.this, ProductDetailActivity.class);
+            intent.putExtra("image", product.getImage());
+            intent.putExtra("name", product.getName());
+            intent.putExtra("price", product.getPrice());
+            startActivity(intent);
+        });
+        ImageButton btnCart = findViewById(R.id.btnCart);
+        btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(HomeActivity.this, LoginActivity.class);
+                Intent it = new Intent(HomeActivity.this, CartActivity.class);
                 startActivity(it);
             }
         });
