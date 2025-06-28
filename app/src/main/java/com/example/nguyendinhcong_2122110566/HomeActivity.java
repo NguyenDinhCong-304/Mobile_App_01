@@ -28,7 +28,7 @@ public class HomeActivity extends AppCompatActivity {
         List<Product> products = new ArrayList<>();
         products.add(new Product(R.drawable.iphone_16_pro_max, "Iphone 16", "29.000.000"));
         products.add(new Product(R.drawable.samsung_s24, "Samsung S24", "23.000.000"));
-        products.add(new Product(R.drawable.oppo_reno11, "Oppo Reno 11", "12.000.000"));
+        products.add(new Product(R.drawable.oppo_reno_11, "Oppo Reno 11", "12.000.000"));
         products.add(new Product(R.drawable.xiaomi_redmi_13, "Xiaomi Redmi", "6.500.000"));
 
         ProductAdapter adapter = new ProductAdapter(this, products);
@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
             intent.putExtra("price", product.getPrice());
             startActivity(intent);
         });
+        //nút đến trang giỏ hàng
         ImageButton btnCart = findViewById(R.id.btnCart);
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,5 +51,29 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+        //Nút đến trang user
+        ImageButton btnUser = findViewById(R.id.btnUser);
+        btnUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(HomeActivity.this, UserActivity.class);
+                startActivity(it);
+            }
+        });
+//        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+//        bottomNav.setOnItemSelectedListener(item -> {
+//            switch (item.getItemId()) {
+//                case R.id.nav_home:
+//                    // Đang ở Home, không làm gì
+//                    return true;
+//                case R.id.nav_cart:
+//                    startActivity(new Intent(this, CartActivity.class));
+//                    return true;
+//                case R.id.nav_account:
+//                    Toast.makeText(this, "Tài khoản", Toast.LENGTH_SHORT).show();
+//                    return true;
+//            }
+//            return false;
+//        });
     }
 }

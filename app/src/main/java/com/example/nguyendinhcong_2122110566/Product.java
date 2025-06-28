@@ -20,4 +20,13 @@ public class Product implements Serializable {
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void increaseQuantity() { this.quantity++; }
     public void decreaseQuantity() { if (this.quantity > 1) this.quantity--; }
+    private boolean selectedForCheckout = false;
+
+    public boolean isSelectedForCheckout() {
+        return selectedForCheckout;
+    }
+
+    public void setSelectedForCheckout(boolean selectedForCheckout) {
+        this.selectedForCheckout = selectedForCheckout;
+    }
 }

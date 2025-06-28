@@ -39,10 +39,14 @@ public class CartActivity extends AppCompatActivity {
             startActivity(new Intent(this, HomeActivity.class));
         });
 
+//        findViewById(R.id.checkoutButton).setOnClickListener(view -> {
+//            CartManager.getInstance().clearCart();
+//            Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
+//            finish();
+//        });
         findViewById(R.id.checkoutButton).setOnClickListener(view -> {
-            CartManager.getInstance().clearCart();
-            Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
-            finish();
+            Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
+            startActivity(intent);
         });
 
         updateTotalPrice();

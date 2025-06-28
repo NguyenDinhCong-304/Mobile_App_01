@@ -16,7 +16,6 @@ import java.util.List;
 public class CartAdapter extends ArrayAdapter<Product> {
     private Context context;
     private List<Product> cartItems;
-
     public CartAdapter(Context context, List<Product> cartItems) {
         super(context, 0, cartItems);
         this.context = context;

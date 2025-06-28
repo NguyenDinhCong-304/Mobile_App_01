@@ -46,6 +46,7 @@ dependencies {
     // Sử dụng activity version 1.9.0 để tương thích với compileSdk 34
     implementation("androidx.activity:activity:1.9.0")
     implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation("com.google.android.material:material:1.11.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
