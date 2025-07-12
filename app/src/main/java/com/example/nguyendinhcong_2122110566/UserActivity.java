@@ -26,21 +26,29 @@ public class UserActivity extends AppCompatActivity {
         textUserName = findViewById(R.id.textUserName);
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Lấy email từ SharedPreferences
+//        // Lấy email từ SharedPreferences
+//        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+//        String email = prefs.getString("email", "Không có email");
+//        String name = email.split("@")[0];  // Giả định tên là phần trước @
+//
+//        textUserEmail.setText("Email: " + email);
+//        textUserName.setText("Tên người dùng: " + name);
         SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String email = prefs.getString("email", "Không có email");
-        String name = email.split("@")[0];  // Giả định tên là phần trước @
 
+        String username = prefs.getString("username", "Không có username");
+        String email = prefs.getString("email", "Không có email");
+
+        textUserName.setText("Tên người dùng: " + username);
         textUserEmail.setText("Email: " + email);
-        textUserName.setText("Tên người dùng: " + name);
+
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Xoá SharedPreferences nếu cần
                 SharedPreferences.Editor editor = prefs.edit();
-                //editor.clear();
-                editor.remove("isLoggedIn");//Fowx trạng thái đăng nhập
+                editor.clear();
+                //editor.remove("isLoggedIn");
                 editor.apply();
 
                 // Trở về màn hình đăng nhập

@@ -7,11 +7,11 @@
     android:padding="8dp"
     android:background="#EEEEEE"
     android:layout_marginBottom="8dp">
-<!--    <RadioButton-->
-<!--        android:id="@+id/radioSelect"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <RadioButton
+        android:id="@+id/radioSelect"
+        android:layout_marginTop="20dp"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"/>
     <ImageView
         android:id="@+id/imageViewCart"
         android:layout_width="80dp"
@@ -78,6 +78,6 @@
         android:text="Xóa"
         android:background="@android:color/transparent"
         android:textColor="#FF0000"
-        android:layout_width="80dp"
+        android:layout_width="75dp"
         android:layout_height="match_parent" />
 </LinearLayout>
