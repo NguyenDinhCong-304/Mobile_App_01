@@ -7,9 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -39,7 +42,9 @@ public class CartAdapter extends ArrayAdapter<Product> {
         Button btnDecrease = convertView.findViewById(R.id.btnDecrease);
         Button btnRemove = convertView.findViewById(R.id.btnRemove);
 
-        image.setImageResource(product.getImage());
+        //Load ảnh từ URL
+        Picasso.get().load(product.getImageUrl()).into(image);
+
         name.setText(product.getName());
         price.setText("Giá: " + product.getPrice());
         quantityText.setText(String.valueOf(product.getQuantity()));
@@ -61,7 +66,15 @@ public class CartAdapter extends ArrayAdapter<Product> {
             notifyDataSetChanged();
             ((CartActivity) context).updateTotalPrice();
         });
+        RadioButton radioSelect = convertView.findViewById(R.id.radioSelect);
+        radioSelect.setChecked(product.isSelected());
 
+        // Xử lý sự kiện khi chọn
+        radioSelect.setOnClickListener(v -> {
+            product.setSelected(!product.isSelected());
+            notifyDataSetChanged();
+            ((CartActivity) context).updateTotalPrice(); // cập nhật lại tổng giá
+        });
         return convertView;
     }
 }

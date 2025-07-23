@@ -9,7 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class CheckoutActivity extends AppCompatActivity {
     private ListView checkoutListView;
@@ -31,8 +34,13 @@ public class CheckoutActivity extends AppCompatActivity {
         ProductAdapter adapter = new ProductAdapter(this, items);
         checkoutListView.setAdapter(adapter);
 
-        int total = calculateTotal(items);
-        totalTextView.setText("Tổng tiền: " + String.format("%,d", total) + " VND");
+        double total = calculateTotal(items);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
+        formatter.setMinimumFractionDigits(2);
+        formatter.setMaximumFractionDigits(2);
+
+        String formattedTotal = formatter.format(total);
+        totalTextView.setText("Tổng: " + formattedTotal);
 
         btnPlaceOrder.setOnClickListener(v -> {
             String address = addressEditText.getText().toString().trim();
@@ -49,11 +57,10 @@ public class CheckoutActivity extends AppCompatActivity {
         findViewById(R.id.btnBack).setOnClickListener(v -> onBackPressed());
     }
 
-    private int calculateTotal(List<Product> items) {
-        int total = 0;
+    private double calculateTotal(List<Product> items) {
+        double total = 0.0;
         for (Product p : items) {
-            int price = Integer.parseInt(p.getPrice().replace(".", "").replace(" VND", ""));
-            total += price * p.getQuantity();
+            total += p.getPrice() * p.getQuantity();
         }
         return total;
     }

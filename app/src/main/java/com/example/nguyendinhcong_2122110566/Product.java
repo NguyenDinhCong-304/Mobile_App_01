@@ -3,19 +3,35 @@ package com.example.nguyendinhcong_2122110566;
 import java.io.Serializable;
 
 public class Product implements Serializable {
-    int Image;
-    String Name;
-    String Price;
+    private int id;
+    private String name;
+    private double price;
+    private String description;
+    private String imageUrl;
     int quantity;
-    public Product(int image, String name, String price){
-        this.Image=image;
-        this.Name=name;
-        this.Price=price;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public Product(int id, String name, double price, String imageUrl, String description){
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.imageUrl = imageUrl;
         this.quantity = 1;
     }
-    public int getImage(){return Image;}
-    public String getName(){return Name;}
-    public String getPrice(){return Price;}
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+    public String getDescription() { return description; }
+    public String getImageUrl() { return imageUrl; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
     public void increaseQuantity() { this.quantity++; }

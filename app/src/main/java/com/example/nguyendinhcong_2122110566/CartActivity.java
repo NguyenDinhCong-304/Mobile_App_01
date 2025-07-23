@@ -2,16 +2,14 @@ package com.example.nguyendinhcong_2122110566;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class CartActivity extends AppCompatActivity {
     private ListView cartListView;
@@ -39,11 +37,6 @@ public class CartActivity extends AppCompatActivity {
             startActivity(new Intent(this, HomeActivity.class));
         });
 
-//        findViewById(R.id.checkoutButton).setOnClickListener(view -> {
-//            CartManager.getInstance().clearCart();
-//            Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_SHORT).show();
-//            finish();
-//        });
         findViewById(R.id.checkoutButton).setOnClickListener(view -> {
             Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
             startActivity(intent);
@@ -53,13 +46,19 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public void updateTotalPrice() {
-        int total = 0;
+        double total = 0.0; // Chuyển sang double để giữ phần thập phân
         for (Product product : cartItems) {
-            String priceStr = product.getPrice().replace(".", "").replace(" VND", "");
-            try {
-                total += Integer.parseInt(priceStr) * product.getQuantity();
-            } catch (NumberFormatException ignored) {}
+            if (product.isSelected()) {
+                total += product.getPrice() * product.getQuantity();
+            }
         }
-        totalPriceTextView.setText("Tổng: " + String.format("%,d", total) + " VND");
+
+        // Định dạng theo kiểu tiền tệ Mỹ, giữ 2 chữ số thập phân
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.US);
+        formatter.setMinimumFractionDigits(2); // bắt buộc có 2 số sau dấu .
+        formatter.setMaximumFractionDigits(2); // không làm tròn quá mức
+
+        String formattedTotal = formatter.format(total);
+        totalPriceTextView.setText("Tổng: " + formattedTotal);
     }
 }
